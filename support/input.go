@@ -19,11 +19,3 @@ func LoadInput() string {
 
 	return string(bytes)
 }
-
-func AbsInt[T int | int64](i T) int {
-	if i < 0 {
-		return int(-i)
-	}
-
-	return int(i)
-}
