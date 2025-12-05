@@ -46,3 +46,18 @@ func StringOfDigitsAsSliceOfInts(in string) []int {
 
 	return out
 }
+
+func SliceOfNumericStringsToSliceOfInts(in []string) []int {
+	out := make([]int, len(in))
+
+	for i, numericStr := range in {
+		asInt, err := strconv.Atoi(numericStr)
+		if err != nil {
+			panic(fmt.Sprintf("Could not convert %s to int", numericStr))
+		}
+
+		out[i] = asInt
+	}
+
+	return out
+}
