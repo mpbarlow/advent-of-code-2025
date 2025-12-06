@@ -22,3 +22,25 @@ func InputTo2DGrid(input string) [][]rune {
 
 	return grid
 }
+
+func Transpose[T any](input [][]T) [][]T {
+	rows := len(input)
+	if rows == 0 {
+		return nil
+	}
+
+	cols := len(input[0])
+
+	output := make([][]T, cols)
+	for i := range output {
+		output[i] = make([]T, rows)
+	}
+
+	for i := range input {
+		for j := range input[i] {
+			output[j][i] = input[i][j]
+		}
+	}
+
+	return output
+}
