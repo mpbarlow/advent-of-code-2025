@@ -37,8 +37,8 @@ func partTwo(grid [][]rune) int {
 }
 
 // Return the coordinates of all removable rolls
-func getReachableRolls(grid [][]rune) []support.Point {
-	reachableRolls := make([]support.Point, 0)
+func getReachableRolls(grid [][]rune) []support.Point2 {
+	reachableRolls := make([]support.Point2, 0)
 
 	for y, line := range grid {
 		for x := range line {
@@ -63,7 +63,7 @@ func getReachableRolls(grid [][]rune) []support.Point {
 			}
 
 			if neighbouringRolls < 4 {
-				reachableRolls = append(reachableRolls, support.Point{X: x, Y: y})
+				reachableRolls = append(reachableRolls, support.Point2{X: x, Y: y})
 			}
 		}
 	}
@@ -72,7 +72,7 @@ func getReachableRolls(grid [][]rune) []support.Point {
 }
 
 // Remove the rolls specified by rollCoords from grid, returning the new grid
-func removeRolls(grid [][]rune, rollCoords []support.Point) [][]rune {
+func removeRolls(grid [][]rune, rollCoords []support.Point2) [][]rune {
 	for _, coord := range rollCoords {
 		grid[coord.Y][coord.X] = emptySpace
 	}
