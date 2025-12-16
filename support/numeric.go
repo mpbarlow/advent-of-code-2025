@@ -2,6 +2,7 @@ package support
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -12,6 +13,30 @@ func AbsInt[T int | int64](i T) int {
 	}
 
 	return int(i)
+}
+
+func MinInt(ints ...int) int {
+	min := math.MaxInt
+
+	for _, i := range ints {
+		if i < min {
+			min = i
+		}
+	}
+
+	return min
+}
+
+func MaxInt(ints ...int) int {
+	max := math.MinInt
+
+	for _, i := range ints {
+		if i > max {
+			max = i
+		}
+	}
+
+	return max
 }
 
 func StringOfDigitsAsSliceOfInts(in string) []int {
