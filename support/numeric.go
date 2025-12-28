@@ -2,6 +2,7 @@ package support
 
 import (
 	"fmt"
+	"iter"
 	"math"
 	"strconv"
 	"strings"
@@ -68,4 +69,25 @@ func SliceOfNumericStringsToSliceOfInts(in []string) []int {
 	}
 
 	return out
+}
+
+func SumSeq(s iter.Seq[int]) int {
+	total := 0
+
+	for v := range s {
+		total += v
+	}
+
+	return total
+}
+
+func Gcd(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func Lcm(a, b int) int {
+	return (a * b) / Gcd(a, b)
 }

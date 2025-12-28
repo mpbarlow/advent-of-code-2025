@@ -1,6 +1,9 @@
 package support
 
-import "strings"
+import (
+	"slices"
+	"strings"
+)
 
 func Map[I any, O any](input []I, fn func(I) O) []O {
 	output := make([]O, 0, len(input))
@@ -43,4 +46,39 @@ func Transpose[T any](input [][]T) [][]T {
 	}
 
 	return output
+}
+
+// Generate n choose k combinations. Returns an empty slice if k > len(n).
+func GenerateCombinations[T any](n []T, k int) [][]T {
+	combinations := make([][]T, 0)
+
+	for i, val := range n {
+		partialCombo := []T{val}
+
+		if k > 1 {
+			// Recursively generate the other possibilities for the combination. Exclude any element we've already
+			// considered to prevent duplicates.
+			nextN := make([]T, 0, len(n)-1)
+			nextN = append(nextN, n[i+1:]...)
+
+			for _, next := range GenerateCombinations(nextN, k-1) {
+				combinations = append(combinations, slices.Concat(partialCombo, next))
+			}
+		} else {
+			combinations = append(combinations, partialCombo)
+		}
+	}
+
+	return combinations
+}
+
+// Given n, return a slice containing min..<max
+func Range(min, max int) []int {
+	r := make([]int, 0, max-min)
+
+	for i := min; i < max; i++ {
+		r = append(r, i)
+	}
+
+	return r
 }
